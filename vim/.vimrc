@@ -407,8 +407,10 @@ let g:user_emmet_mode='a'
 
 """""""""""""""""""""""""""""""""""""""""
 ""nerdtree
-" 在 vim 启动的时候默认开启 NERDTree（autocmd 可以缩写为 au）
+" 在vim启动的时候默认开启并切换编辑页面 
 autocmd VimEnter * NERDTree
+wincmd w
+autocmd VimEnter * wincmd w
 " 关闭vim时，如果打开的文件除了NERDTree没有其他文件时，它自动关闭
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 " " 显示行号
@@ -515,6 +517,11 @@ let g:syntastic_html_tidy_ignore_errors = [
 """""""""""""""""""""""""""""""""""""""""
 
 """""""""""""""""""""""""""""""""""""""""
+"" NERDTreeTabsToggle
+map <Leader>n <plug>NERDTreeTabsToggle<CR>
+"""""""""""""""""""""""""""""""""""""""""
+
+"""""""""""""""""""""""""""""""""""""""""
 
 ""vundle
 set nocompatible              " be iMproved, required
@@ -533,6 +540,7 @@ Plugin 'elzr/vim-json'
 Plugin 'mattn/emmet-vim'
 Plugin 'Yggdroot/indentLine'
 Plugin 'scrooloose/nerdtree'
+Plugin 'jistr/vim-nerdtree-tabs'
 Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'MattesGroeger/vim-bookmarks'
 Plugin 'SirVer/ultisnips'
