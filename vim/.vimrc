@@ -498,7 +498,23 @@ inoremap <expr><C-e>  neocomplete#cancel_popup()
  autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 " disable docstrings popup
  set completeopt-=preview
+"""""""""""""""""""""""""""""""""""""""""
 
+"""""""""""""""""""""""""""""""""""""""""
+ ""syntastic
+let g:syntastic_python_checkers = ['flake8']
+let g:syntastic_python_flake8_args="--ignore=E501,E265,F403,E402"
+let g:syntastic_html_tidy_ignore_errors = [
+            \  'plain text isn''t allowed in <head> elements',
+            \  '<base> escaping malformed URI reference',
+            \  'discarding unexpected <body>',
+            \  '<script> escaping malformed URI reference',
+            \  '</head> isn''t allowed in <body> elements',
+            \  '<a> escaping malformed URI reference',
+            \ ]
+"""""""""""""""""""""""""""""""""""""""""
+
+"""""""""""""""""""""""""""""""""""""""""
 
 ""vundle
 set nocompatible              " be iMproved, required
@@ -524,6 +540,7 @@ Plugin 'honza/vim-snippets'
 Plugin 'Shougo/neocomplete.vim'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'scrooloose/nerdcommenter'
+Plugin 'scrooloose/syntastic'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
