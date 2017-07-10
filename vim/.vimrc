@@ -535,6 +535,3 @@ filetype plugin indent on    " required
 " :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
 "
 
-" highlight 要放到airline后面, 否则被airline覆盖
-" highlight WarningMsg term=standout ctermfg=5 guifg=Red
-
