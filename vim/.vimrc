@@ -408,7 +408,7 @@ let g:user_emmet_mode='a'
 """""""""""""""""""""""""""""""""""""""""
 ""nerdtree
 " 在vim启动的时候默认开启并切换编辑页面 
-autocmd VimEnter * NERDTree
+autocmd VimEnter * if !argc() | NERDTree | endif
 wincmd w
 autocmd VimEnter * wincmd w
 " 关闭vim时，如果打开的文件除了NERDTree没有其他文件时，它自动关闭
