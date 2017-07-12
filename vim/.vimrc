@@ -518,6 +518,7 @@ let g:syntastic_html_tidy_ignore_errors = [
 
 """""""""""""""""""""""""""""""""""""""""
 "" NERDTreeTabsToggle
+let g:nerdtree_tabs_open_on_console_startup=1
 map <Leader>n <plug>NERDTreeTabsToggle<CR>
 """""""""""""""""""""""""""""""""""""""""
 
