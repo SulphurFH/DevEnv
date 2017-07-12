@@ -216,8 +216,8 @@ set scrolloff=3
 
 """""""""""""""""""""""""""""""""""""""""
 ""Fuzzyfinder
-nmap zf :FufFile<CR>
-nmap zb :FufBuffer<CR>
+nmap ff :FufFile<CR>
+nmap fb :FufBuffer<CR>
 """""""""""""""""""""""""""""""""""""""""
 
 
@@ -522,6 +522,24 @@ map <Leader>n <plug>NERDTreeTabsToggle<CR>
 """""""""""""""""""""""""""""""""""""""""
 
 """""""""""""""""""""""""""""""""""""""""
+""PreserveNoEOL
+let g:PreserveNoEOL = 1
+"""""""""""""""""""""""""""""""""""""""""
+
+"""""""""""""""""""""""""""""""""""""""""
+""vim-easymotion
+map <Leader> <Plug>(easymotion-prefix)
+
+map <Leader>l <Plug>(easymotion-lineforward)
+map <Leader>j <Plug>(easymotion-j)
+map <Leader>k <Plug>(easymotion-k)
+map <Leader>h <Plug>(easymotion-linebackward)
+
+let g:EasyMotion_smartcase = 1
+let g:EasyMotion_startofline = 0 " keep cursor colum when JK motion
+"""""""""""""""""""""""""""""""""""""""""
+
+"""""""""""""""""""""""""""""""""""""""""
 
 ""vundle
 set nocompatible              " be iMproved, required
@@ -549,6 +567,14 @@ Plugin 'Shougo/neocomplete.vim'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'scrooloose/syntastic'
+Plugin 'vim-scripts/FuzzyFinder'
+Plugin 'easymotion/vim-easymotion'
+Plugin 'pangloss/vim-javascript'
+
+" vim-scripts repos on vim.org
+Plugin 'L9'
+Plugin 'LargeFile'
+Plugin 'PreserveNoEOL'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
