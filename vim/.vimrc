@@ -165,6 +165,9 @@ else
     set guifont=Monaco\ for\ Powerline:h16
 endif
 
+" 设置高亮当前行
+set cursorline
+
 " 下面5行用来解决gVim菜单栏和右键菜单乱码问题
 set encoding=utf8
 set langmenu=zh_CN.UTF-8
@@ -541,6 +544,13 @@ let g:EasyMotion_startofline = 0 " keep cursor colum when JK motion
 """""""""""""""""""""""""""""""""""""""""
 
 """""""""""""""""""""""""""""""""""""""""
+""vim-markdown
+let g:vim_markdown_folding_disabled=1
+""vim-instant-markdown
+let g:instant_markdown_slow = 1
+"""""""""""""""""""""""""""""""""""""""""
+
+"""""""""""""""""""""""""""""""""""""""""
 
 ""vundle
 set nocompatible              " be iMproved, required
@@ -571,6 +581,10 @@ Plugin 'scrooloose/syntastic'
 Plugin 'vim-scripts/FuzzyFinder'
 Plugin 'easymotion/vim-easymotion'
 Plugin 'pangloss/vim-javascript'
+Plugin 'editorconfig/editorconfig-vim'
+Plugin 'godlygeek/tabular'
+Plugin 'plasticboy/vim-markdown'
+Plugin 'suan/vim-instant-markdown'
 
 " vim-scripts repos on vim.org
 Plugin 'L9'
