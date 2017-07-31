@@ -426,7 +426,7 @@ let NERDTreeWinSize=31
 " " 在终端启动vim时，共享NERDTree
 "let g:nerdtree_tabs_open_on_console_startup=1
 " " 忽略一下文件的显示
-let NERDTreeIgnore=['\.pyc','\~$','\.swp','\.DS_Store','.vscode']
+let NERDTreeIgnore=['\.pyc','\~$','\.swp','\.DS_Store','.vscode','__pycache__']
 " " 显示书签列表
 let NERDTreeShowBookmarks=1
 " " 当打开 NERDTree 窗口时，自动显示 Bookmarks
