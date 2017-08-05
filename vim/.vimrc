@@ -9,22 +9,31 @@ else
 endif  
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"F1-F10快捷键绑定
-"<F2>按下F2调出/隐藏 NERDTree
-"<F4>在python文件添加头部
-"<F5>单个文件编译并执行
-"<F6>make,ctrl+F6 清理make
-"<F7>gdb调试
+"F2-F10快捷键绑定
+"<F2>按下F2行号开关，用于鼠标复制代码用
+"<F3>按下F3调出/隐藏 NERDTree
+"<F4>按下F4调出/隐藏 Tagbar
+"<F6>在python文件添加头部
 "<F8>自动使用autopep8格式化当前文件
-"<F9> toggle location list
 "<F10>无须重启即使vimrc配置生效
-"<F11>添加helptags帮助文档
 "<F12>generate ctags for current folder
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"<F4> 按下F2调出/隐藏 NERDTree
-map <F2> :NERDTreeToggle<cr>
-"<F4> 添加头部作者等信息
-nmap <F4> :call SmartAddHeader()<cr>
+" 为方便复制，用<F2>开启/关闭行号显示:
+function! HideNumber()
+  if(&relativenumber == &number)
+    set number!
+  elseif(&number)
+    set number!
+  endif
+  set number?
+endfunc
+nnoremap <F2> :call HideNumber()<CR>
+"<F3> 按下F3调出/隐藏 NERDTree
+map <F3> :NERDTreeToggle<CR>
+"<F4> 按下F4调出/隐藏 Tagbar
+map <F4> :TagbarToggle<CR>
+"<F6> 添加头部作者等信息
+nmap <F6> :call SmartAddHeader()<CR>
 function! SmartAddHeader()
     if &filetype=="python"
         normal gg
@@ -35,121 +44,31 @@ function! SmartAddHeader()
     endif
 endf
 
-"<F5>单个文件编译并执行
-map <F5> :call Do_OneFileMake()<CR>
-function! Do_OneFileMake()
-  exec "w"
-  if expand("%:p:h")!=getcwd()
-    echohl WarningMsg | echo "Fail to make! This file is not in the current dir!" | echohl None
-    return
-  endif
-  let sourcefileename=expand("%:t")
-  if (sourcefileename=="" || (&filetype!="cpp" && &filetype!="c" && &filetype!="python"))
-    echohl WarningMsg | echo "Fail to make! Please select the right file!" | echohl None
-    return
-  endif
-  let deletedspacefilename=substitute(sourcefileename,' ','','g')
-  if strlen(deletedspacefilename)!=strlen(sourcefileename)
-    echohl WarningMsg | echo "Fail to make! Please delete the spaces in the filename!" | echohl None
-    return
-  endif
-  if &filetype=="c"
-    if g:iswindows==1
-      set makeprg=gcc\ -o\ %<.exe\ %
-    else
-      set makeprg=gcc\ -o\ %<\ %
-    endif
-  elseif &filetype=="cpp"
-    if g:iswindows==1
-      set makeprg=g++\ -o\ %<.exe\ %
-    else
-      set makeprg=g++\ -o\ %<\ %
-    endif
-  elseif &filetype=="python"
-    execute "!python %"
-    return
-  endif
-  if(g:iswindows==1)
-    let outfilename=substitute(sourcefileename,'\(\.[^.]*\)$','.exe','g')
-    let toexename=outfilename
-  else
-    let outfilename=substitute(sourcefileename,'\(\.[^.]*\)$','','g')
-    let toexename=outfilename
-  endif
-
-  if filereadable(outfilename)
-    if(g:iswindows==1)
-      let outdeletedsuccess=delete(getcwd()."\\".outfilename)
-    else
-      let outdeletedsuccess=delete("./".outfilename)
-    endif
-    if(outdeletedsuccess!=0)
-      set makeprg=make
-      echohl WarningMsg | echo "Fail to make! I cannot delete the ".outfilename | echohl None
-      return
-    endif
-  endif
-  execute "silent make"
-  set makeprg=make
-  execute "copen"
-
-  execute "normal :"
-  if filereadable(outfilename)
-    if(g:iswindows==1)
-      execute "!".toexename
-    else
-      execute "!./".toexename
-    endif
-  endif
-  exec "cw"
-endfunction
-"进行make的设置
-map <F6> :call Do_make()<CR>
-map <c-F6> :silent make clean<CR>
-function! Do_make()
-  set makeprg=make
-  execute "silent make"
-  execute "copen"
-endfunction  
-
-"<F7>  gdb调试
-map <F7> :call Debug()<CR>
-func!  Debug()
-exec "w"
-"把调试信息加到可执行文件中,
-"如果没有-g，你将看不见程序的函数名、变量名，所代替的全是运行时的内存地址
-exec "!gcc -g % -o %<"
-exec "!gdb %<"
-endfunc
-
 "<F8>  vim-autopep8
 autocmd FileType python map <buffer> <F8> :call Autopep8()<CR><C-l><CR>
 
-"<F9>  toggle location list
-function! ToggleErrors()
-    let old_last_winnr = winnr('$')
-    lclose
-    if old_last_winnr == winnr('$')
-        " Nothing was closed, open syntastic error location panel
-        Errors
-    endif
-endfunction
-map <F9> :call ToggleErrors()<CR>
-
 "<F10> 改变.vimrc后无须重启vi即生效
 map <F10> :w<cr>:so %<cr>
-
-map <F11> :helptags ~/.vim/doc<cr>
 
 " map F12 to generate ctags for current folder:
 map <F12> :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<CR><CR>
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" 按键设置
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" 关闭方向键, 强迫自己用 hjkl
+map <Left> <Nop>
+map <Right> <Nop>
+map <Up> <Nop>
+map <Down> <Nop>
+
+" 调整缩进后自动选中，方便再次操作
+vnoremap < <gv
+vnoremap > >gv
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 外观设置
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" startup windows size
-"set lines=50 columns=108
 
 " syntax
 syntax on
@@ -372,28 +291,6 @@ set laststatus=2
 """""""""""""""""""""""""""""""""""""""""
 
 """""""""""""""""""""""""""""""""""""""""
-""jedi-vim
-" If you are a person who likes to use VIM-buffers not tabs
-let g:jedi#use_tabs_not_buffers = 0
-" disable docstrings popup
-autocmd FileType python setlocal completeopt-=preview
-
-" use neocomplcache with jedi-vim
-autocmd FileType python setlocal omnifunc=jedi#completions
-let g:jedi#completions_enabled = 0
-let g:jedi#auto_vim_configuration = 0
-let g:jedi#smart_auto_mappings = 0
-if !exists('g:neocomplete#force_omni_input_patterns')
-    let g:neocomplete#force_omni_input_patterns = {}
-endif
-let g:neocomplete#force_omni_input_patterns.python =
-            \ '\%([^. \t]\.\|^\s*@\|^\s*from\s.\+import \|^\s*from
-            \|^\s*import \)\w*'
-let g:jedi#popup_on_dot = 1
-let g:jedi#popup_select_first = 0
-"""""""""""""""""""""""""""""""""""""""""
-
-"""""""""""""""""""""""""""""""""""""""""
 ""vim-autopep8
 let g:autopep8_disable_show_diff=1
 let g:autopep8_max_line_length=120
@@ -426,7 +323,7 @@ let NERDTreeWinSize=31
 " " 在终端启动vim时，共享NERDTree
 "let g:nerdtree_tabs_open_on_console_startup=1
 " " 忽略一下文件的显示
-let NERDTreeIgnore=['\.pyc','\~$','\.swp','\.DS_Store','.vscode','__pycache__']
+let NERDTreeIgnore=['\.pyc','\~$','\.swp','\.DS_Store','.vscode','__pycache__','.git']
 " " 显示书签列表
 let NERDTreeShowBookmarks=1
 " " 当打开 NERDTree 窗口时，自动显示 Bookmarks
@@ -446,6 +343,11 @@ let g:NERDTreeIndicatorMapCustom = {
     \ "Clean"     : "✔︎",
     \ "Unknown"   : "?"
     \ }
+"""""""""""""""""""""""""""""""""""""""""
+
+"""""""""""""""""""""""""""""""""""""""""
+"" NERDTreeTabsToggle
+let g:nerdtree_tabs_open_on_console_startup=1
 """""""""""""""""""""""""""""""""""""""""
 
 """""""""""""""""""""""""""""""""""""""""
@@ -506,6 +408,27 @@ inoremap <expr><C-e>  neocomplete#cancel_popup()
 """""""""""""""""""""""""""""""""""""""""
 
 """""""""""""""""""""""""""""""""""""""""
+""jedi-vim
+" If you are a person who likes to use VIM-buffers not tabs
+let g:jedi#use_tabs_not_buffers = 0
+" disable docstrings popup
+autocmd FileType python setlocal completeopt-=preview
+
+" use neocomplcache with jedi-vim
+autocmd FileType python setlocal omnifunc=jedi#completions
+let g:jedi#completions_enabled = 0
+let g:jedi#auto_vim_configuration = 0
+let g:jedi#smart_auto_mappings = 0
+if !exists('g:neocomplete#force_omni_input_patterns')
+    let g:neocomplete#force_omni_input_patterns = {}
+endif
+let g:neocomplete#force_omni_input_patterns.python =
+            \ '\%([^. \t]\.\|^\s*@\|^\s*from\s.\+import \|^\s*from \|^\s*import \)\w*'
+let g:jedi#popup_on_dot = 1
+let g:jedi#popup_select_first = 0
+"""""""""""""""""""""""""""""""""""""""""
+
+"""""""""""""""""""""""""""""""""""""""""
  ""syntastic
 let g:syntastic_python_checkers = ['flake8']
 let g:syntastic_python_flake8_args="--ignore=E501,E265,F403,E402"
@@ -517,12 +440,6 @@ let g:syntastic_html_tidy_ignore_errors = [
             \  '</head> isn''t allowed in <body> elements',
             \  '<a> escaping malformed URI reference',
             \ ]
-"""""""""""""""""""""""""""""""""""""""""
-
-"""""""""""""""""""""""""""""""""""""""""
-"" NERDTreeTabsToggle
-let g:nerdtree_tabs_open_on_console_startup=1
-map <Leader>n <plug>NERDTreeTabsToggle<CR>
 """""""""""""""""""""""""""""""""""""""""
 
 """""""""""""""""""""""""""""""""""""""""
@@ -551,6 +468,12 @@ let g:instant_markdown_slow = 1
 """""""""""""""""""""""""""""""""""""""""
 
 """""""""""""""""""""""""""""""""""""""""
+""ctrlsf.vim
+map f <Plug>CtrlSFPrompt
+map F <Plug>CtrlSFQuickfixPrompt
+"""""""""""""""""""""""""""""""""""""""""
+
+"""""""""""""""""""""""""""""""""""""""""
 
 ""vundle
 set nocompatible              " be iMproved, required
@@ -564,6 +487,7 @@ call vundle#begin()
 Plugin 'itchyny/lightline.vim'
 Plugin 'gmarik/vundle'
 Plugin 'davidhalter/jedi-vim'
+Plugin 'Shougo/neocomplete.vim'
 Plugin 'tell-k/vim-autopep8'
 Plugin 'elzr/vim-json'
 Plugin 'mattn/emmet-vim'
@@ -574,7 +498,6 @@ Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'MattesGroeger/vim-bookmarks'
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
-Plugin 'Shougo/neocomplete.vim'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'scrooloose/syntastic'
@@ -585,9 +508,13 @@ Plugin 'editorconfig/editorconfig-vim'
 Plugin 'godlygeek/tabular'
 Plugin 'plasticboy/vim-markdown'
 Plugin 'suan/vim-instant-markdown'
+Plugin 'jiangmiao/auto-pairs'
+Plugin 'dyng/ctrlsf.vim'
+Plugin 'majutsushi/tagbar'
 
 " vim-scripts repos on vim.org
 Plugin 'L9'
+Plugin 'colorizer'
 Plugin 'LargeFile'
 Plugin 'PreserveNoEOL'
 
