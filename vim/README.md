@@ -46,5 +46,10 @@ brew install editorconfig
 ```
 npm -g install instant-markdown-d
 ```
+
+> 6. Tagbar
+```
+brew install ctags
+```
 ## 5. onedark主题
 参考[onedark.vim](https://github.com/joshdick/onedark.vim)
