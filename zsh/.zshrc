@@ -112,3 +112,7 @@ export PATH="/usr/local/Cellar/vim/8.0.0502/bin:$PATH"
 alias ll='ls -alF'
 alias la='ll -A'
 alias l='ls -CF'
+alias wk='workon'
+alias ipy='ipython'
+alias py='python'
+alias py3='python3'
