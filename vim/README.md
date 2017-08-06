@@ -8,9 +8,11 @@ brew install vim --with-cscope --with-lua --with-python --enable-gui=yes --overr
 
 ## 2.安装vundle
 
-```shell
+```
 git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-将本仓库中的.vimrc替换本地的.vimrc```
+
+将本仓库中的.vimrc替换本地的.vimrc
+```
 
 
 ## 3.安装vundle插件
