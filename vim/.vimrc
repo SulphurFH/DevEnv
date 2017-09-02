@@ -13,7 +13,7 @@ endif
 "<F2>按下F2行号开关，用于鼠标复制代码用
 "<F3>按下F3调出/隐藏 NERDTree
 "<F4>按下F4调出/隐藏 Tagbar
-"<F6>在python文件添加头部
+"F6>在python文件添加头部
 "<F8>自动使用autopep8格式化当前文件
 "<F10>无须重启即使vimrc配置生效
 "<F12>generate ctags for current folder
@@ -241,7 +241,7 @@ autocmd BufEnter * execute ":silent! lcd " . expand("%:p:h")
 
 " 只在下列文件类型被侦测到的时候显示行号，普通文本文件不显示
 if has("autocmd")
-autocmd FileType xml,html,c,cs,java,perl,shell,bash,cpp,python,vim,markdown set number
+autocmd FileType xml,html,shell,bash,python,vim,markdown,javascript set number
 autocmd FileType xml,html vmap <C-o> <ESC>'<i<!--<ESC>o<ESC>'>o-->
 autocmd FileType java,c,cpp,cs vmap <C-o> <ESC>'<o/*<ESC>'>o*/
 "设置自动断行
