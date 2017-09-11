@@ -366,6 +366,12 @@ let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 """""""""""""""""""""""""""""""""""""""""
 
 """""""""""""""""""""""""""""""""""""""""
+"" YouCompleteMe
+let g:ycm_key_list_select_completion = ['<C-n>']
+let g:ycm_key_list_previous_completion = ['<C-p>']
+"""""""""""""""""""""""""""""""""""""""""
+
+"""""""""""""""""""""""""""""""""""""""""
 ""jedi-vim
 " If you are a person who likes to use VIM-buffers not tabs
 let g:jedi#use_tabs_not_buffers = 0
