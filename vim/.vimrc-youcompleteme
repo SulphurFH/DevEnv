@@ -176,7 +176,7 @@ set shortmess=atI
 set report=0
 
 " 不让vim发出讨厌的滴滴声
-"set noerrorbells
+set noerrorbells
 
 " 在被分割的窗口间显示空白，便于阅读
 set fillchars=vert:\ ,stl:\ ,stlnc:\
@@ -223,7 +223,7 @@ set smartindent
 set cindent
 
 " 具体编辑文件类型的一般设置，比如不要 tab 等
-autocmd FileType python set tabstop=4 shiftwidth=4 expandtab ai
+autocmd FileType python,sh set tabstop=4 shiftwidth=4 expandtab ai
 autocmd FileType javascript,html,css,xml set tabstop=2 shiftwidth=2 softtabstop=2 expandtab ai
 autocmd BufRead,BufNewFile *.md,*.mkd,*.markdown set filetype=markdown.mkd
 autocmd BufRead,BufNewFile *.part set filetype=html
@@ -243,7 +243,7 @@ autocmd BufEnter * execute ":silent! lcd " . expand("%:p:h")
 
 " 只在下列文件类型被侦测到的时候显示行号，普通文本文件不显示
 if has("autocmd")
-autocmd FileType xml,html,shell,bash,python,vim,markdown,javascript set number
+autocmd FileType xml,html,sh,bash,python,vim,markdown,javascript set number
 autocmd FileType xml,html vmap <C-o> <ESC>'<i<!--<ESC>o<ESC>'>o-->
 autocmd FileType java,c,cpp,cs vmap <C-o> <ESC>'<o/*<ESC>'>o*/
 "设置自动断行
