@@ -12,7 +12,7 @@ endif
 "F2-F10快捷键绑定
 "<F2>按下F2行号开关，用于鼠标复制代码用
 "<F3>按下F3调出/隐藏 NERDTree
-"<F4>按下F4调出/隐藏 Tagbar
+"<F4>按下F4调出/隐藏 LeaderfFile
 "F6>在python文件添加头部
 "<F8>自动使用autopep8格式化当前文件
 "<F10>无须重启即使vimrc配置生效
@@ -31,7 +31,7 @@ nnoremap <F2> :call HideNumber()<CR>
 "<F3> 按下F3调出/隐藏 NERDTree
 map <F3> :NERDTreeToggle<CR>
 "<F4> 按下F4调出/隐藏 Tagbar
-map <F4> :TagbarToggle<CR>
+map <F4> :LeaderfFile<CR>
 "<F6> 添加头部作者等信息
 nmap <F6> :call SmartAddHeader()<CR>
 function! SmartAddHeader()
@@ -474,7 +474,7 @@ Plugin 'plasticboy/vim-markdown'
 Plugin 'suan/vim-instant-markdown'
 Plugin 'jiangmiao/auto-pairs'
 Plugin 'dyng/ctrlsf.vim'
-Plugin 'majutsushi/tagbar'
+Plugin 'Yggdroot/LeaderF'
 
 " vim-scripts repos on vim.org
 Plugin 'L9'
