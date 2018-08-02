@@ -243,7 +243,7 @@ autocmd BufEnter * execute ":silent! lcd " . expand("%:p:h")
 
 " 只在下列文件类型被侦测到的时候显示行号，普通文本文件不显示
 if has("autocmd")
-autocmd FileType xml,html,sh,bash,python,vim,markdown,javascript set number
+autocmd FileType xml,html,sh,bash,python,vim,markdown,javascript,go set number
 autocmd FileType xml,html vmap <C-o> <ESC>'<i<!--<ESC>o<ESC>'>o-->
 autocmd FileType java,c,cpp,cs vmap <C-o> <ESC>'<o/*<ESC>'>o*/
 "设置自动断行
@@ -475,6 +475,7 @@ Plugin 'suan/vim-instant-markdown'
 Plugin 'jiangmiao/auto-pairs'
 Plugin 'dyng/ctrlsf.vim'
 Plugin 'Yggdroot/LeaderF'
+Plugin 'fatih/vim-go'
 
 " vim-scripts repos on vim.org
 Plugin 'L9'
