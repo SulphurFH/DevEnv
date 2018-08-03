@@ -176,7 +176,7 @@ set shortmess=atI
 set report=0
 
 " 不让vim发出讨厌的滴滴声
-set noerrorbells
+"set noerrorbells
 
 " 在被分割的窗口间显示空白，便于阅读
 set fillchars=vert:\ ,stl:\ ,stlnc:\
@@ -223,7 +223,7 @@ set smartindent
 set cindent
 
 " 具体编辑文件类型的一般设置，比如不要 tab 等
-autocmd FileType python,sh set tabstop=4 shiftwidth=4 expandtab ai
+autocmd FileType python set tabstop=4 shiftwidth=4 expandtab ai
 autocmd FileType javascript,html,css,xml set tabstop=2 shiftwidth=2 softtabstop=2 expandtab ai
 autocmd BufRead,BufNewFile *.md,*.mkd,*.markdown set filetype=markdown.mkd
 autocmd BufRead,BufNewFile *.part set filetype=html
@@ -243,7 +243,7 @@ autocmd BufEnter * execute ":silent! lcd " . expand("%:p:h")
 
 " 只在下列文件类型被侦测到的时候显示行号，普通文本文件不显示
 if has("autocmd")
-autocmd FileType xml,html,sh,bash,python,vim,markdown,javascript set number
+autocmd FileType xml,html,shell,bash,python,vim,markdown,javascript,go set number
 autocmd FileType xml,html vmap <C-o> <ESC>'<i<!--<ESC>o<ESC>'>o-->
 autocmd FileType java,c,cpp,cs vmap <C-o> <ESC>'<o/*<ESC>'>o*/
 "设置自动断行
@@ -311,8 +311,8 @@ let g:user_emmet_mode='a'
 ""nerdtree
 " 在vim启动的时候默认开启并切换编辑页面 
 autocmd VimEnter * if !argc() | NERDTree | endif
-wincmd w
-autocmd VimEnter * wincmd w
+"wincmd w
+"autocmd VimEnter * wincmd w
 " 关闭vim时，如果打开的文件除了NERDTree没有其他文件时，它自动关闭
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 " " 显示行号
@@ -325,7 +325,7 @@ let NERDTreeWinSize=31
 " " 在终端启动vim时，共享NERDTree
 "let g:nerdtree_tabs_open_on_console_startup=1
 " " 忽略一下文件的显示
-let NERDTreeIgnore=['\.pyc','\~$','\.swp','\.DS_Store','.vscode','__pycache__','.git']
+let NERDTreeIgnore=['\.pyc','\~$','\.swp','\.DS_Store','.vscode','__pycache__','.git', '.idea']
 " " 显示书签列表
 let NERDTreeShowBookmarks=1
 " " 当打开 NERDTree 窗口时，自动显示 Bookmarks
@@ -366,47 +366,9 @@ let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 """""""""""""""""""""""""""""""""""""""""
 
 """""""""""""""""""""""""""""""""""""""""
-""neocomplete
-" Note: This option must set it in .vimrc(_vimrc).  NOT IN .gvimrc(_gvimrc)!
-" Disable AutoComplPop.
-let g:acp_enableAtStartup = 0
-" Use neocomplete.
-let g:neocomplete#enable_at_startup = 1
-" Use smartcase.
-let g:neocomplete#enable_smart_case = 1
-" Set minimum syntax keyword length.
-let g:neocomplete#sources#syntax#min_keyword_length = 3 
-" buffer file name pattern that locks neocomplcache. e.g. ku.vim or fuzzyfinder 
-let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
-"AutoComplPop like behavior.
-"let g:neocomplete#enable_auto_select = 1 
-
-" Recommended key-mappings.
-" <CR>: close popup and save indent.
-inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
-function! s:my_cr_function()
-    return neocomplete#close_popup() . "\<CR>"
-        " For no inserting <CR> key.
-            "return pumvisible() ? neocomplete#close_popup() : "\<CR>"
-endfunction
-" <TAB>: completion.
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-" <C-h>, <BS>: close popup and delete backword char.
-inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
-inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
-inoremap <expr><C-y>  neocomplete#close_popup()
-inoremap <expr><C-e>  neocomplete#cancel_popup()
-" Close popup by <Space>.
-"inoremap <expr><Space> pumvisible() ? neocomplete#close_popup() : "\<Space>"
-
-" Enable omni completion.
- autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
- autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
- autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
- autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
- autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-" disable docstrings popup
- set completeopt-=preview
+"" YouCompleteMe
+let g:ycm_key_list_select_completion = ['<C-n>']
+let g:ycm_key_list_previous_completion = ['<C-p>']
 """""""""""""""""""""""""""""""""""""""""
 
 """""""""""""""""""""""""""""""""""""""""
@@ -476,6 +438,21 @@ map F <Plug>CtrlSFQuickfixPrompt
 """""""""""""""""""""""""""""""""""""""""
 
 """""""""""""""""""""""""""""""""""""""""
+"" vim-go settings
+let g:go_fmt_command = "goimports"
+"" vim-go custom mappings
+au FileType go nmap <Leader>d <Plug>(go-def)
+"au FileType go nmap <Leader>i <Plug>(go-info)
+"au FileType go nmap <Leader>gd <Plug>(go-doc)
+"au FileType go nmap <Leader>gv <Plug>(go-doc-vertical)
+"au FileType go nmap <leader>r <Plug>(go-run)
+"au FileType go nmap <leader>b <Plug>(go-build)
+"au FileType go nmap <leader>t <Plug>(go-test)
+"au FileType go nmap <leader>c <Plug>(go-coverage)
+"au FileType go nmap <Leader>ds <Plug>(go-def-split)
+"au FileType go nmap <Leader>dv <Plug>(go-def-vertical)
+"au FileType go nmap <Leader>dt <Plug>(go-def-tab)
+"au FileType go nmap <Leader>e <Plug>(go-rename)
 
 ""vundle
 set nocompatible              " be iMproved, required
@@ -489,7 +466,7 @@ call vundle#begin()
 Plugin 'itchyny/lightline.vim'
 Plugin 'gmarik/vundle'
 Plugin 'davidhalter/jedi-vim'
-Plugin 'Shougo/neocomplete.vim'
+Plugin 'Valloric/YouCompleteMe'
 Plugin 'tell-k/vim-autopep8'
 Plugin 'elzr/vim-json'
 Plugin 'mattn/emmet-vim'
@@ -513,6 +490,7 @@ Plugin 'suan/vim-instant-markdown'
 Plugin 'jiangmiao/auto-pairs'
 Plugin 'dyng/ctrlsf.vim'
 Plugin 'Yggdroot/LeaderF'
+Plugin 'fatih/vim-go'
 
 " vim-scripts repos on vim.org
 Plugin 'L9'

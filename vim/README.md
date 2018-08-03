@@ -11,7 +11,7 @@ brew install vim --with-cscope --with-lua --with-python --enable-gui=yes --overr
 ```
 git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 
-将本仓库中的.vimrc替换本地的.vimrc
+将本仓库中的.vimrc(YouCompleteMe)替换本地的.vimrc
 ```
 
 
@@ -54,5 +54,13 @@ npm -g install instant-markdown-d
 ```
 brew install ctags
 ```
-## 5. onedark主题
+
+## 5. YouCompleteMe
+参考[YouCompleteMe](https://github.com/Valloric/YouCompleteMe)
+
+## 7. GoLang Supports
+
+启动vim，执行 :GoInstallBinaries
+
+## 6. onedark主题
 参考[onedark.vim](https://github.com/joshdick/onedark.vim)
