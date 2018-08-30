@@ -223,7 +223,7 @@ set smartindent
 set cindent
 
 " 具体编辑文件类型的一般设置，比如不要 tab 等
-autocmd FileType python set tabstop=4 shiftwidth=4 expandtab ai
+autocmd FileType python,go  set tabstop=4 shiftwidth=4 expandtab ai
 autocmd FileType javascript,html,css,xml set tabstop=2 shiftwidth=2 softtabstop=2 expandtab ai
 autocmd BufRead,BufNewFile *.md,*.mkd,*.markdown set filetype=markdown.mkd
 autocmd BufRead,BufNewFile *.part set filetype=html
@@ -376,7 +376,7 @@ let g:ycm_key_list_previous_completion = ['<C-p>']
 " If you are a person who likes to use VIM-buffers not tabs
 let g:jedi#use_tabs_not_buffers = 0
 " disable docstrings popup
-autocmd FileType python setlocal completeopt-=preview
+autocmd FileType python,go setlocal completeopt-=preview
 
 " use neocomplcache with jedi-vim
 autocmd FileType python setlocal omnifunc=jedi#completions
