@@ -1,0 +1,46 @@
+/*PATH: ~/.config/terminator/config*/
+[global_config]
+  enabled_plugins = CustomCommandsMenu, LaunchpadCodeURLHandler, APTURLHandler, LaunchpadBugURLHandler
+  handle_size = -3
+  inactive_color_offset = 1.0
+  suppress_multiple_term_dialog = True
+  title_transmit_bg_color = "#3e3838"
+  title_transmit_fg_color = "#000000"
+  window_state = maximise
+[keybindings]
+  switch_to_tab_1 = <Alt>1
+  switch_to_tab_10 = <Alt>0
+  switch_to_tab_2 = <Alt>2
+  switch_to_tab_3 = <Alt>3
+  switch_to_tab_4 = <Alt>4
+  switch_to_tab_5 = <Alt>5
+  switch_to_tab_6 = <Alt>6
+  switch_to_tab_7 = <Alt>7
+  switch_to_tab_8 = <Alt>8
+  switch_to_tab_9 = <Alt>9
+[layouts]
+  [[default]]
+    [[[child1]]]
+      parent = window0
+      profile = default
+      type = Terminal
+    [[[window0]]]
+      parent = ""
+      size = 925, 570
+      type = Window
+[plugins]
+[profiles]
+  [[default]]
+    background_color = "#0e2424"
+    background_darkness = 1.0
+    background_type = transparent
+    cursor_color = "#e8e8e8"
+    font = Monaco 10
+    foreground_color = "#e8e8e8"
+    icon_bell = False
+    palette = "#000000:#5a8e1c:#2d5f5f:#cdcd00:#1e90ff:#cd00cd:#00cdcd:#e5e5e5:#4c4c4c:#868e09:#00ff00:#ffff00:#4682b4:#ff00ff:#00ffff:#ffffff"
+    scroll_background = False
+    scrollback_lines = 3000
+    scrollbar_position = hidden
+    show_titlebar = False
+    use_system_font = False
