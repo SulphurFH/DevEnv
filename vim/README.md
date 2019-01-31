@@ -30,7 +30,6 @@ pip install jedi
 
 ```
 pip install flake8
-brew install tidy-html5
 ```
 
 > 3. vim-autopep8依赖
@@ -39,18 +38,7 @@ brew install tidy-html5
 pip install autopep8
 ```
 
-> 4. editorconfig-vim依赖
-
-```
-brew install editorconfig
-```
-    
-> 5. vim-instant-markdown依赖
-```
-npm -g install instant-markdown-d
-```
-
-> 6. Tagbar
+> 4. Tagbar
 ```
 brew install ctags
 ```

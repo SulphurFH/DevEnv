@@ -6,15 +6,13 @@ if(has("win32") || has("win95") || has("win64") || has("win16"))
   let g:iswindows=1
 else
   let g:iswindows=0
-endif  
+endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "F2-F10快捷键绑定
 "<F2>按下F2行号开关，用于鼠标复制代码用
 "<F3>按下F3调出/隐藏 NERDTree
-"<F4>按下F4调出/隐藏 LeaderfFile
 "F6>在python文件添加头部
-"<F8>自动使用autopep8格式化当前文件
 "<F10>无须重启即使vimrc配置生效
 "<F12>generate ctags for current folder
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -30,8 +28,6 @@ endfunc
 nnoremap <F2> :call HideNumber()<CR>
 "<F3> 按下F3调出/隐藏 NERDTree
 map <F3> :NERDTreeToggle<CR>
-"<F4> 按下F4调出/隐藏 Tagbar
-map <F4> :LeaderfFile<CR>
 "<F6> 添加头部作者等信息
 nmap <F6> :call SmartAddHeader()<CR>
 function! SmartAddHeader()
@@ -43,9 +39,6 @@ function! SmartAddHeader()
         normal 3j
     endif
 endf
-
-"<F8>  vim-autopep8
-autocmd FileType python map <buffer> <F8> :call Autopep8()<CR><C-l><CR>
 
 "<F10> 改变.vimrc后无须重启vi即生效
 map <F10> :w<cr>:so %<cr>
@@ -73,14 +66,14 @@ vnoremap > >gv
 " syntax
 syntax on
 " colors
-colorscheme onedark 
+colorscheme onedark
 
 " 设置行间距
 " font
-if g:iswindows 
+if g:iswindows
     set linespace=1
     set guifont=Lucida\ Console:h13
-else 
+else
     set guifont=Monaco\ for\ Powerline:h16
 endif
 
@@ -94,7 +87,7 @@ set imcmdline
 source $VIMRUNTIME/delmenu.vim
 source $VIMRUNTIME/menu.vim
 
-set guioptions-=m "不显示菜单. 
+set guioptions-=m "不显示菜单.
 set guioptions-=T "不显示工具栏
 " 解决gVim中提示框乱码
 language message zh_CN.UTF-8
@@ -119,6 +112,7 @@ set viminfo+=!
 set iskeyword+=_,$,@,%,#,-
 
 set colorcolumn=120
+"highlight ColorColumn ctermbg=0 guibg=lightgrey
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " buffer设置
@@ -201,7 +195,7 @@ set listchars=tab:\|\ ,trail:.,extends:>,precedes:<,eol:$
 set novisualbell
 
 " statusline
-"set statusline=\ %F%m%r%h%w\ %=\ [pos:%l:%v:%p%%]\ [%{&ff}\ %{&fenc!=''?&fenc:&enc}]\ \ [type:%Y]\ \  
+"set statusline=\ %F%m%r%h%w\ %=\ [pos:%l:%v:%p%%]\ [%{&ff}\ %{&fenc!=''?&fenc:&enc}]\ \ [type:%Y]\ \
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 文本格式和排版
@@ -283,28 +277,18 @@ endfun
 """"""""""""""""""""""插件开始""""""""""""""""""""""""
 
 """""""""""""""""""""""""""""""""""""""""
-""lightline 
+""pathogen
+execute pathogen#infect()
+"""""""""""""""""""""""""""""""""""""""""
+
+"""""""""""""""""""""""""""""""""""""""""
+""lightline
 set laststatus=2
 """""""""""""""""""""""""""""""""""""""""
 
 """""""""""""""""""""""""""""""""""""""""
-""vim-autopep8
-let g:autopep8_disable_show_diff=1
-let g:autopep8_max_line_length=120
-"""""""""""""""""""""""""""""""""""""""""
-
-"""""""""""""""""""""""""""""""""""""""""
-""emmet-vim
-"Enable just for html/css/jsx
-let g:user_emmet_install_global = 0
-autocmd FileType html,htmldjango,css,jsx EmmetInstall
-"enable all function in all mode.
-let g:user_emmet_mode='a'
-"""""""""""""""""""""""""""""""""""""""""
-
-"""""""""""""""""""""""""""""""""""""""""
 ""nerdtree
-" 在vim启动的时候默认开启并切换编辑页面 
+" 在vim启动的时候默认开启并切换编辑页面
 autocmd VimEnter * if !argc() | NERDTree | endif
 "wincmd w
 "autocmd VimEnter * wincmd w
@@ -320,7 +304,7 @@ let NERDTreeWinSize=31
 " " 在终端启动vim时，共享NERDTree
 "let g:nerdtree_tabs_open_on_console_startup=1
 " " 忽略一下文件的显示
-let NERDTreeIgnore=['\.pyc','\~$','\.swp','\.DS_Store','.vscode','__pycache__','.git', '.idea']
+let NERDTreeIgnore=['\.pyc','\~$','\.swp','\.DS_Store','.vscode','__pycache__','.git', '.idea', '.coveragerc']
 " " 显示书签列表
 let NERDTreeShowBookmarks=1
 " " 当打开 NERDTree 窗口时，自动显示 Bookmarks
@@ -388,42 +372,40 @@ let g:jedi#popup_select_first = 0
 """""""""""""""""""""""""""""""""""""""""
 
 """""""""""""""""""""""""""""""""""""""""
- ""syntastic
-let g:syntastic_python_checkers = ['flake8']
-let g:syntastic_python_flake8_args="--ignore=E501,E265,F403,E402"
-let g:syntastic_html_tidy_ignore_errors = [
-            \  'plain text isn''t allowed in <head> elements',
-            \  '<base> escaping malformed URI reference',
-            \  'discarding unexpected <body>',
-            \  '<script> escaping malformed URI reference',
-            \  '</head> isn''t allowed in <body> elements',
-            \  '<a> escaping malformed URI reference',
-            \ ]
+""ale
+let g:ale_linters_explicit = 1
+let g:ale_completion_delay = 500
+let g:ale_echo_delay = 20
+let g:ale_lint_delay = 500
+let g:ale_echo_msg_format = '[%linter%] %code: %%s'
+let g:ale_lint_on_text_changed = 'normal'
+let g:ale_lint_on_insert_leave = 1
+let g:airline#extensions#ale#enabled = 1
+
+let g:ale_c_gcc_options = '-Wall -O2 -std=c99'
+let g:ale_cpp_gcc_options = '-Wall -O2 -std=c++14'
+let g:ale_c_cppcheck_options = ''
+let g:ale_cpp_cppcheck_options = ''
+
+let g:ale_sign_eror = 'E'
+let g:ale_sign_warning = 'W'
+
+let g:ale_linters = {
+    \ 'python': ['flake8']
+    \ }
+
+let g:ale_fixers = {
+    \ '*': ['remove_trailing_lines','trim_whitespace' ],
+    \ 'python': ['autopep8']
+    \ }
+let g:ale_fix_on_save = 1
+let g:ale_list_window_size = 5
+let g:ale_python_flake8_options = '--ignore=E501,E265,F403,E402 --max-line-length=120'
 """""""""""""""""""""""""""""""""""""""""
 
 """""""""""""""""""""""""""""""""""""""""
 ""PreserveNoEOL
 let g:PreserveNoEOL = 1
-"""""""""""""""""""""""""""""""""""""""""
-
-"""""""""""""""""""""""""""""""""""""""""
-""vim-easymotion
-map <Leader> <Plug>(easymotion-prefix)
-
-map <Leader>l <Plug>(easymotion-lineforward)
-map <Leader>j <Plug>(easymotion-j)
-map <Leader>k <Plug>(easymotion-k)
-map <Leader>h <Plug>(easymotion-linebackward)
-
-let g:EasyMotion_smartcase = 1
-let g:EasyMotion_startofline = 0 " keep cursor colum when JK motion
-"""""""""""""""""""""""""""""""""""""""""
-
-"""""""""""""""""""""""""""""""""""""""""
-""vim-markdown
-let g:vim_markdown_folding_disabled=1
-""vim-instant-markdown
-let g:instant_markdown_slow = 1
 """""""""""""""""""""""""""""""""""""""""
 
 """""""""""""""""""""""""""""""""""""""""
@@ -462,27 +444,19 @@ Plugin 'itchyny/lightline.vim'
 Plugin 'gmarik/vundle'
 Plugin 'davidhalter/jedi-vim'
 Plugin 'Valloric/YouCompleteMe'
-Plugin 'tell-k/vim-autopep8'
-Plugin 'elzr/vim-json'
 Plugin 'Yggdroot/indentLine'
-Plugin 'scrooloose/nerdtree'
-Plugin 'jistr/vim-nerdtree-tabs'
-Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'MattesGroeger/vim-bookmarks'
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
 Plugin 'airblade/vim-gitgutter'
+Plugin 'tpope/vim-fugitive'
 Plugin 'scrooloose/nerdcommenter'
-Plugin 'scrooloose/syntastic'
-Plugin 'easymotion/vim-easymotion'
-Plugin 'pangloss/vim-javascript'
-Plugin 'editorconfig/editorconfig-vim'
-Plugin 'godlygeek/tabular'
-Plugin 'plasticboy/vim-markdown'
-Plugin 'suan/vim-instant-markdown'
+Plugin 'w0rp/ale'
+Plugin 'scrooloose/nerdtree'
+Plugin 'jistr/vim-nerdtree-tabs'
+Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'jiangmiao/auto-pairs'
 Plugin 'dyng/ctrlsf.vim'
-Plugin 'Yggdroot/LeaderF'
 Plugin 'fatih/vim-go'
 
 " vim-scripts repos on vim.org
@@ -500,4 +474,3 @@ filetype plugin indent on    " required
 " :PluginSearch foo - searches for foo; append `!` to refresh local cache
 " :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
 "
-
