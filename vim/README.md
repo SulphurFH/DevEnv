@@ -21,12 +21,12 @@ git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 
 ## 4.安装依赖软件
 > 1. jedi-vim依赖
-    
+
 ```
 pip install jedi
 ```
 
-> 2. syntastic依赖
+> 2. ale依赖
 
 ```
 pip install flake8
@@ -36,11 +36,6 @@ pip install flake8
 
 ```
 pip install autopep8
-```
-
-> 4. Tagbar
-```
-brew install ctags
 ```
 
 ## 5. YouCompleteMe

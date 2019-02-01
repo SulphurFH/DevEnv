@@ -267,7 +267,6 @@ fun! <SID>StripTrailingWhitespaces()
     %s/\s\+$//e
     call cursor(l, c)
 endfun
-"autocmd FileType c,cpp,java,php,ruby,python autocmd BufWritePre <buffer> :call <SID>StripTrailingWhitespaces()
 
 """"""""""""""""""""""插件开始""""""""""""""""""""""""
 
@@ -277,8 +276,11 @@ execute pathogen#infect()
 """""""""""""""""""""""""""""""""""""""""
 
 """""""""""""""""""""""""""""""""""""""""
-""lightline
+"lightline
 set laststatus=2
+let g:lightline = {
+  \ 'colorscheme': 'onedark',
+  \ }
 """""""""""""""""""""""""""""""""""""""""
 
 """""""""""""""""""""""""""""""""""""""""
@@ -366,7 +368,6 @@ let g:ale_lint_delay = 500
 let g:ale_echo_msg_format = '[%linter%] %code: %%s'
 let g:ale_lint_on_text_changed = 'normal'
 let g:ale_lint_on_insert_leave = 1
-let g:airline#extensions#ale#enabled = 1
 
 let g:ale_c_gcc_options = '-Wall -O2 -std=c99'
 let g:ale_cpp_gcc_options = '-Wall -O2 -std=c++14'
@@ -387,11 +388,6 @@ let g:ale_fixers = {
 let g:ale_fix_on_save = 1
 let g:ale_list_window_size = 5
 let g:ale_python_flake8_options = '--ignore=E501,E265,F403,E402 --max-line-length=120'
-"""""""""""""""""""""""""""""""""""""""""
-
-"""""""""""""""""""""""""""""""""""""""""
-""PreserveNoEOL
-let g:PreserveNoEOL = 1
 """""""""""""""""""""""""""""""""""""""""
 
 """""""""""""""""""""""""""""""""""""""""
@@ -427,6 +423,7 @@ call vundle#begin()
 
 " let Vundle manage Vundle, required
 Plugin 'itchyny/lightline.vim'
+Plugin 'sheerun/vim-polyglot'
 Plugin 'gmarik/vundle'
 Plugin 'davidhalter/jedi-vim'
 Plugin 'Valloric/YouCompleteMe'
@@ -449,7 +446,6 @@ Plugin 'fatih/vim-go'
 Plugin 'L9'
 Plugin 'colorizer'
 Plugin 'LargeFile'
-Plugin 'PreserveNoEOL'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
