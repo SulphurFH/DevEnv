@@ -12,9 +12,8 @@ endif
 "F2-F10快捷键绑定
 "<F2>按下F2行号开关，用于鼠标复制代码用
 "<F3>按下F3调出/隐藏 NERDTree
-"F6>在python文件添加头部
+"<F6>在python文件添加头部
 "<F10>无须重启即使vimrc配置生效
-"<F12>generate ctags for current folder
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 为方便复制，用<F2>开启/关闭行号显示:
 function! HideNumber()
@@ -42,10 +41,6 @@ endf
 
 "<F10> 改变.vimrc后无须重启vi即生效
 map <F10> :w<cr>:so %<cr>
-
-" map F12 to generate ctags for current folder:
-map <F12> :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<CR><CR>
-
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 按键设置
@@ -301,8 +296,6 @@ let NERDTreeAutoCenter=1
 let NERDTreeShowHidden=1
 " " 设置宽度
 let NERDTreeWinSize=31
-" " 在终端启动vim时，共享NERDTree
-"let g:nerdtree_tabs_open_on_console_startup=1
 " " 忽略一下文件的显示
 let NERDTreeIgnore=['\.pyc','\~$','\.swp','\.DS_Store','.vscode','__pycache__','.git', '.idea', '.coveragerc']
 " " 显示书签列表
@@ -356,17 +349,10 @@ let g:ycm_key_list_previous_completion = ['<C-p>']
 let g:jedi#use_tabs_not_buffers = 0
 " disable docstrings popup
 autocmd FileType python,go setlocal completeopt-=preview
-
-" use neocomplcache with jedi-vim
 autocmd FileType python setlocal omnifunc=jedi#completions
 let g:jedi#completions_enabled = 0
 let g:jedi#auto_vim_configuration = 0
 let g:jedi#smart_auto_mappings = 0
-if !exists('g:neocomplete#force_omni_input_patterns')
-    let g:neocomplete#force_omni_input_patterns = {}
-endif
-let g:neocomplete#force_omni_input_patterns.python =
-            \ '\%([^. \t]\.\|^\s*@\|^\s*from\s.\+import \|^\s*from \|^\s*import \)\w*'
 let g:jedi#popup_on_dot = 1
 let g:jedi#popup_select_first = 0
 """""""""""""""""""""""""""""""""""""""""
