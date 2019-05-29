@@ -423,7 +423,6 @@ call vundle#begin()
 
 " let Vundle manage Vundle, required
 Plugin 'itchyny/lightline.vim'
-Plugin 'sheerun/vim-polyglot'
 Plugin 'gmarik/vundle'
 Plugin 'davidhalter/jedi-vim'
 Plugin 'Valloric/YouCompleteMe'
@@ -441,6 +440,7 @@ Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'jiangmiao/auto-pairs'
 Plugin 'dyng/ctrlsf.vim'
 Plugin 'fatih/vim-go'
+Plugin 'sheerun/vim-polyglot'
 
 " vim-scripts repos on vim.org
 Plugin 'L9'
