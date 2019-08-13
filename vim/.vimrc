@@ -106,7 +106,7 @@ set viminfo+=!
 " 带有如下符号的单词不要被换行分割
 set iskeyword+=_,$,@,%,#,-
 
-set colorcolumn=120
+set colorcolumn=79,119
 "highlight ColorColumn ctermbg=0 guibg=lightgrey
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
