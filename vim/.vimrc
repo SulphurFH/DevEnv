@@ -60,6 +60,7 @@ vnoremap > >gv
 
 " syntax
 syntax on
+
 " colors
 colorscheme onedark
 
@@ -159,6 +160,8 @@ set shortmess=atI
 " 通过使用: commands命令，告诉我们文件的哪一行被改变过
 set report=0
 
+set magic
+
 " 不让vim发出讨厌的滴滴声
 "set noerrorbells
 
@@ -227,7 +230,7 @@ autocmd BufEnter * execute ":silent! lcd " . expand("%:p:h")
 
 " 只在下列文件类型被侦测到的时候显示行号，普通文本文件不显示
 if has("autocmd")
-autocmd FileType xml,html,shell,bash,python,vim,markdown,javascript,go set number
+autocmd FileType xml,html,sh,bash,python,vim,markdown,javascript,go,yaml set number
 autocmd FileType xml,html vmap <C-o> <ESC>'<i<!--<ESC>o<ESC>'>o-->
 autocmd FileType java,c,cpp,cs vmap <C-o> <ESC>'<o/*<ESC>'>o*/
 "设置自动断行
@@ -279,8 +282,9 @@ execute pathogen#infect()
 "lightline
 set laststatus=2
 let g:lightline = {
-  \ 'colorscheme': 'onedark',
+  \ 'colorscheme': 'wombat',
   \ }
+
 """""""""""""""""""""""""""""""""""""""""
 
 """""""""""""""""""""""""""""""""""""""""
@@ -299,7 +303,7 @@ let NERDTreeShowHidden=1
 " " 设置宽度
 let NERDTreeWinSize=31
 " " 忽略一下文件的显示
-let NERDTreeIgnore=['\.pyc','\~$','\.swp','\.DS_Store','.vscode','__pycache__','.git', '.idea', '.coveragerc']
+let NERDTreeIgnore=['\.pyc','\~$','\.swp','\.DS_Store','.vscode','__pycache__','.git', '.idea', '.coverage', '.pytest_cache', '.sqlite3', 'celerybeat-schedule']
 " " 显示书签列表
 let NERDTreeShowBookmarks=1
 " " 当打开 NERDTree 窗口时，自动显示 Bookmarks
@@ -323,7 +327,7 @@ let g:NERDTreeIndicatorMapCustom = {
 
 """""""""""""""""""""""""""""""""""""""""
 "" NERDTreeTabsToggle
-let g:nerdtree_tabs_open_on_console_startup=1
+"let g:nerdtree_tabs_open_on_console_startup=1
 """""""""""""""""""""""""""""""""""""""""
 
 """""""""""""""""""""""""""""""""""""""""
@@ -369,11 +373,6 @@ let g:ale_echo_msg_format = '[%linter%] %code: %%s'
 let g:ale_lint_on_text_changed = 'normal'
 let g:ale_lint_on_insert_leave = 1
 
-let g:ale_c_gcc_options = '-Wall -O2 -std=c99'
-let g:ale_cpp_gcc_options = '-Wall -O2 -std=c++14'
-let g:ale_c_cppcheck_options = ''
-let g:ale_cpp_cppcheck_options = ''
-
 let g:ale_sign_eror = 'E'
 let g:ale_sign_warning = 'W'
 
@@ -387,7 +386,8 @@ let g:ale_fixers = {
     \ }
 let g:ale_fix_on_save = 1
 let g:ale_list_window_size = 5
-let g:ale_python_flake8_options = '--ignore=E501,E265,F403,E402 --max-line-length=120'
+let g:ale_python_flake8_options = '--ignore=E265,F403,E402 --max-line-length=119'
+let g:ale_python_autopep8_options = '--max-line-length=119'
 """""""""""""""""""""""""""""""""""""""""
 
 """""""""""""""""""""""""""""""""""""""""
@@ -435,7 +435,7 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'w0rp/ale'
 Plugin 'scrooloose/nerdtree'
-Plugin 'jistr/vim-nerdtree-tabs'
+"Plugin 'jistr/vim-nerdtree-tabs'
 Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'jiangmiao/auto-pairs'
 Plugin 'dyng/ctrlsf.vim'
