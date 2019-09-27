@@ -187,7 +187,8 @@ set hlsearch
 set incsearch
 
 " 输入:set list命令是应该显示些啥？
-set listchars=tab:\|\ ,trail:.,extends:>,precedes:<,eol:$
+set list
+set listchars=tab:\|\ ,trail:.,extends:>,precedes:<
 
 " 不要闪烁
 set novisualbell
@@ -259,7 +260,7 @@ au BufReadPost *.nfo call RestoreFileEncodings()
 " 用空格键来开关折叠
 set foldenable
 set foldmethod=manual
-autocmd FileType python setlocal foldmethod=indent
+autocmd FileType python,go setlocal foldmethod=indent
 set foldlevel=99
 nnoremap <space> @=((foldclosed(line('.')) < 0) ? 'zc' : 'zo')<CR>
 
