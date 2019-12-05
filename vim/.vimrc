@@ -76,6 +76,7 @@ endif
 " 设置高亮当前行
 set cursorline
 
+
 " 下面5行用来解决gVim菜单栏和右键菜单乱码问题
 set encoding=utf8
 set langmenu=zh_CN.UTF-8
@@ -188,7 +189,8 @@ set incsearch
 
 " 输入:set list命令是应该显示些啥？
 set list
-set listchars=tab:\|\ ,trail:.,extends:>,precedes:<
+"set listchars=tab:\|\ ,trail:.,extends:>,precedes:<
+set listchars=tab:\|\ ,extends:>,precedes:<
 
 " 不要闪烁
 set novisualbell
@@ -196,6 +198,11 @@ set novisualbell
 " statusline
 "set statusline=\ %F%m%r%h%w\ %=\ [pos:%l:%v:%p%%]\ [%{&ff}\ %{&fenc!=''?&fenc:&enc}]\ \ [type:%Y]\ \
 
+function! CurDir()
+	let curdir = substitute(getcwd(), $HOME, "~", "g")
+	return curdir
+endfunction
+set statusline=[%n]\ %f%m%r%h\ \|\ \ pwd:\ %{CurDir()}\ \ \|%=\|\ %l,%c\ %p%%\ \|\ ascii=%b,hex=%b%{((&fenc==\"\")?\"\":\"\ \|\ \".&fenc)}\ \|\ %{$USER}\ @\ %{hostname()}\
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 文本格式和排版
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -271,6 +278,11 @@ fun! <SID>StripTrailingWhitespaces()
     %s/\s\+$//e
     call cursor(l, c)
 endfun
+
+
+"vmap <Leader>c "+yy
+"nmap <Leader>c "+yy
+"nmap <Leader>v "+p
 
 """"""""""""""""""""""插件开始""""""""""""""""""""""""
 
@@ -442,6 +454,7 @@ Plugin 'jiangmiao/auto-pairs'
 Plugin 'dyng/ctrlsf.vim'
 Plugin 'fatih/vim-go'
 Plugin 'sheerun/vim-polyglot'
+Plugin 'mileszs/ack.vim'
 
 " vim-scripts repos on vim.org
 Plugin 'L9'
