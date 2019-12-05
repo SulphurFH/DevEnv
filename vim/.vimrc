@@ -454,7 +454,6 @@ Plugin 'jiangmiao/auto-pairs'
 Plugin 'dyng/ctrlsf.vim'
 Plugin 'fatih/vim-go'
 Plugin 'sheerun/vim-polyglot'
-Plugin 'mileszs/ack.vim'
 
 " vim-scripts repos on vim.org
 Plugin 'L9'
