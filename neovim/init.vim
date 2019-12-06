@@ -283,7 +283,7 @@ let g:lightline = {
 """""""""""""""""""""""""""""""""""""""""
 ""nerdtree
 " 在vim启动的时候默认开启并切换编辑页面
-autocmd VimEnter * if !argc() | NERDTree | endif
+autocmd VimEnter * if !argc() | Startify | NERDTree | endif
 "wincmd w
 "autocmd VimEnter * wincmd w
 " 关闭vim时，如果打开的文件除了NERDTree没有其他文件时，它自动关闭
@@ -405,6 +405,16 @@ au FileType go nmap <Leader>d <Plug>(go-def)
 "au FileType go nmap <Leader>dv <Plug>(go-def-vertical)
 "au FileType go nmap <Leader>dt <Plug>(go-def-tab)
 "au FileType go nmap <Leader>e <Plug>(go-rename)
+"
+
+let g:startify_custom_header = [
+  \ '      __         ____                             __    __  ',
+  \ '     / /_  ___  / / /___     _      ______  _____/ /___/ /  ',
+  \ '    / __ \/ _ \/ / / __ \   | | /| / / __ \/ ___/ / __  /   ',
+  \ '   / / / /  __/ / / /_/ /   | |/ |/ / /_/ / /  / / /_/ /    ',
+  \ '  /_/ /_/\___/_/_/\____/    |__/|__/\____/_/  /_/\__,_/     ',
+  \]
+
 
 call plug#begin('~/.vim/plugged')
 
@@ -426,5 +436,6 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'dyng/ctrlsf.vim'
 Plug 'fatih/vim-go'
 Plug 'sheerun/vim-polyglot'
+Plug 'mhinz/vim-startify'
 
 call plug#end()
