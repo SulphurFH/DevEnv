@@ -14,6 +14,13 @@ git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 将本仓库中的.vimrc(YouCompleteMe)替换本地的.vimrc
 ```
 
+## 设置字体
+
+``` shell
+Droid Sans Mono Nerd Font
+https://github.com/ryanoasis/nerd-fonts
+```
+
 
 ## 3.安装vundle插件
 

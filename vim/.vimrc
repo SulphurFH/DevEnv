@@ -303,8 +303,8 @@ let g:lightline = {
 """""""""""""""""""""""""""""""""""""""""
 ""nerdtree
 " 在vim启动的时候默认开启并切换编辑页面
-autocmd VimEnter * if !argc() | NERDTree | endif
-"wincmd w
+autocmd VimEnter * if !argc() | Startify | NERDTree | endif
+
 "autocmd VimEnter * wincmd w
 " 关闭vim时，如果打开的文件除了NERDTree没有其他文件时，它自动关闭
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
@@ -425,6 +425,19 @@ au FileType go nmap <Leader>d <Plug>(go-def)
 "au FileType go nmap <Leader>dv <Plug>(go-def-vertical)
 "au FileType go nmap <Leader>dt <Plug>(go-def-tab)
 "au FileType go nmap <Leader>e <Plug>(go-rename)
+"
+"""""""""""""""""""""""""""""""""""""""""
+
+"""""""""""""""""""""""""""""""""""""""""
+""vim-startify
+let g:startify_custom_header = [
+  \ '      __         ____                             __    __  ',
+  \ '     / /_  ___  / / /___     _      ______  _____/ /___/ /  ',
+  \ '    / __ \/ _ \/ / / __ \   | | /| / / __ \/ ___/ / __  /   ',
+  \ '   / / / /  __/ / / /_/ /   | |/ |/ / /_/ / /  / / /_/ /    ',
+  \ '  /_/ /_/\___/_/_/\____/    |__/|__/\____/_/  /_/\__,_/     ',
+  \ ]
+
 
 ""vundle
 set nocompatible              " be iMproved, required
@@ -454,6 +467,9 @@ Plugin 'jiangmiao/auto-pairs'
 Plugin 'dyng/ctrlsf.vim'
 Plugin 'fatih/vim-go'
 Plugin 'sheerun/vim-polyglot'
+Plugin 'mhinz/vim-startify'
+Plugin 'ryanoasis/vim-devicons'
+Plugin 'tiagofumo/vim-nerdtree-syntax-highlight'
 
 " vim-scripts repos on vim.org
 Plugin 'L9'
